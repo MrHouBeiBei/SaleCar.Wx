@@ -7,6 +7,7 @@ import register from '@/pages/register/register'
 import userProtocol from '@/pages/register/userProtocol'
 //saleCar
 import concessionCarList from '@/pages/saleCar/concessionCarList'
+import carDetail from '@/pages/saleCar/carDetail'
 
 Vue.use(Router)
 
@@ -36,6 +37,11 @@ export default new Router({
       path: '/concessionCarList',
       name: '汽车优惠列表',
       component: concessionCarList
+    },
+    {
+      path: '/carDetail/:id',
+      name: '汽车详情',
+      component: carDetail
     }
   ]
 })
