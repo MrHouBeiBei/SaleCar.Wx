@@ -53,7 +53,14 @@ button, input, select, textarea { font-size:100%; }
 table { border-collapse:collapse; border-spacing:0; }
 
 
+html{
+    height: 100%;
+}
+body{
+    height: 100%;
+}
 input{
     outline: none;
-    -webkit-appearance: none;
+    /* -webkit-appearance: none; */
 }
+

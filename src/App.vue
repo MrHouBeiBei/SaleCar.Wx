@@ -22,6 +22,9 @@ export default {
   margin-top: 60px;
 } */
 
+#app{
+  height: 100%;
+}
 
 </style>
 
