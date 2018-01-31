@@ -60,6 +60,29 @@
       </div>
     </div>
 
+    <!-- 底部导航栏 -->
+    <footer>
+      <div class="bottom-box">
+        <div>
+          <a href="tel:0147-88469258">
+            <i></i>
+            <p>电话咨询</p>
+          </a>
+        </div>
+        <div @click="toastTip">
+          <i></i>
+          <p>购物车</p>
+        </div>
+        <!-- <div>
+          <i></i>
+          <p>我的订单</p>
+        </div> -->
+        <div>
+          <input type="button" value="加入购物车" @click="toastTip">
+        </div>
+      </div>
+    </footer>
+
   </div>
 </template>
 
@@ -77,8 +100,7 @@
       width: 100%;
 
       img {
-        width: 100%;
-        // height: 100%;
+        width: 100%; // height: 100%;
         height: 200/20rem;
       }
     }
@@ -188,16 +210,88 @@
     }
   }
 
+  footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    background-color: #FFF;
+
+    .bottom-box {
+      display: flex;
+
+      div {
+        flex: 1;
+      }
+      div:nth-child(1),
+      div:nth-child(2), // div:nth-child(3) 
+        {
+        text-align: center;
+        font-size: 15/20rem;
+        padding: 0.2rem 0;
+        i {
+          display: inline-block;
+          width: 1rem;
+          height: 1rem;
+        }
+      }
+
+      div:nth-child(1) {
+        a{
+          text-decoration:none;
+        }
+         p {
+          color: #E54344;
+        }
+        i {
+          background: url(../../assets/phone.png) no-repeat;
+          background-size: 100% 100%;
+        }
+      }
+      div:nth-child(2) {
+        i {
+          background: url(../../assets/unShopCart.png) no-repeat;
+          background-size: 100% 100%;
+        }
+      } //  div:nth-child(3){
+      //   i{
+      //     background: url(../../assets/noOrder.png) no-repeat;
+      //     background-size: 100% 100%;          
+      //   }
+      // }
+      div:last-child {
+        input {
+          border: none;
+          width: 100%;
+          height: 100%;
+          font-size: 16/20rem;
+          color: rgb(255, 255, 255);
+          background-color: #E43B40;
+        }
+      }
+    }
+  }
+
 </style>
 
 <script>
+  import {
+    Toast
+  } from 'mint-ui';
   export default {
     data() {
       return {
 
       }
     },
-    methods: {}
+    methods: {
+      toastTip() {
+        Toast({
+          message: '该功能暂时还未上线，请联系客服！',
+          position: 'bottom',
+          duration: 3000
+        });
+      }
+    }
   }
 
 </script>

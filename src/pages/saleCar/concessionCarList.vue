@@ -28,7 +28,7 @@
               <!-- 倒计时 -->
               <div class="time">
                 <i></i><span>72</span>:<span>15</span>:<span>10</span>
-                <i :class="type==1 ? 'collection' : 'unCollection' "></i>
+                <i @click.stop="goC" :class="type==1 ? 'collection' : 'unCollection' "></i>
               </div>
             </div>
           </div>
@@ -189,6 +189,9 @@
     methods: {
       goDetail() {
         this.$router.push(`/carDetail/6`)
+      },
+      goC() {
+        this.type = this.type==1 ? '0' : '1'
       }
     }
   }

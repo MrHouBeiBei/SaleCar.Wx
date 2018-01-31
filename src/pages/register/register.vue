@@ -8,7 +8,7 @@
       </div>
       <div class="bin-phone">
         <div class="agreement">
-          <input type="checkbox" id="agreement">
+          <input type="checkbox" id="agreement" checked v-model="check" @change="changeCheck">
           <label @click="read">{{Agreement}}</label>
         </div>
         <input type="button" value="绑定" @click="binPhone">
@@ -96,7 +96,8 @@
       return {
         phone: '',
         code: '',
-        Agreement: '<<用户协议>>'
+        Agreement: '<<用户协议>>',
+        check: 'true'
       }
     },
     methods: {
@@ -105,6 +106,9 @@
       },
       read() {
         this.$router.push('./userProtocol')
+      },
+      changeCheck() {
+        console.log(this.check)
       }
     }
   }
