@@ -1,6 +1,6 @@
 window.GLOBAL_BASE = "http://wx.baozhenche.com";
 
-export const HOST = `${window.location.host}/#/`
+export const HOST = `http://${window.location.host}/#/`
 
 export const BASE_URL = "http://wx.baozhenche.com";
 

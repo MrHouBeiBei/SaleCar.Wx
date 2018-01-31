@@ -19,11 +19,11 @@ export default new Router({
     //   name: 'Hello',
     //   component: Hello
     // },
-    // {
-    //   path: '/test',
-    //   name: 'test',
-    //   component: test
-    // },
+    {
+      path: '/test',
+      name: 'test',
+      component: test
+    },
     {
       path: '/',
       name: '登陆',

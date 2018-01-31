@@ -12,6 +12,7 @@
           <label @click="read">{{Agreement}}</label>
         </div>
         <input :class="{'canClick': !binButtonDisable, 'dontClick': binButtonDisable}" :disabled='binButtonDisable' type="button" value="绑定" @click="binPhone">
+        <!-- <input type="button" value="清除tooken" @click="clear"> -->
       </div>
     </main>
   </div>
@@ -208,6 +209,9 @@
           this.binButtonDisable = true
         }
       },
+      clear() {
+        localStorage.setItem("token", '') 
+      }
     },
      watch: {
       phone: function () {

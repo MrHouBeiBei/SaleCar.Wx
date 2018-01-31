@@ -1,3 +1,6 @@
+
+import { getToken } from './storage'
+
 export default (type='GET', url='', data={}, async=true) => {
 	return new Promise((resolve, reject) => { //定义一个promise
 		type = type.toUpperCase();
@@ -17,7 +20,8 @@ export default (type='GET', url='', data={}, async=true) => {
 			dataStr = dataStr.substr(0, dataStr.lastIndexOf('&'));
 			url = url + '?' + dataStr;
 			requestObj.open(type, url, async);
-			requestObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			requestObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
+			requestObj.setRequestHeader("token", getToken())
 			requestObj.send();
 		}else if (type == 'POST') {
 			requestObj.open(type, url, async);
