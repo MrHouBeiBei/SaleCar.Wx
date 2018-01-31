@@ -280,8 +280,11 @@
   export default {
     data() {
       return {
-
+        id: this.$route.params.id
       }
+    },
+    created() {
+      console.log(this.id)
     },
     methods: {
       toastTip() {
