@@ -1,12 +1,11 @@
 import Http from './http';
 // import api from 'api/api.json';
 
-
 export default async function(name,params,formData){
-
-  if(api.hasOwnProperty(name)){
-    let item = api[name];
+    // console.log(name)
+    let item = name;
     let url = item.url;
+    console.log(url)
     let ret = {};
     if(typeof params === 'string'){ //传入的是一个字符串
       let arr = url.split('/');
@@ -33,6 +32,7 @@ export default async function(name,params,formData){
     if(item.type == 'post'){
       ret = Http.post(url,params);
     }else if(item.type == 'get'){
+      console.log('get', url)
       ret = Http.get(url);
     }else if(item.type == 'formData'){
       let config = {
@@ -44,4 +44,3 @@ export default async function(name,params,formData){
     }
     return ret;
   }
-}

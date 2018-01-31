@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Hello from '@/components/Hello'
 import test from '@/pages/test'
 // register
+import login from '@/pages/register/login'
 import register from '@/pages/register/register'
 import userProtocol from '@/pages/register/userProtocol'
 //saleCar
@@ -25,6 +26,11 @@ export default new Router({
     // },
     {
       path: '/',
+      name: '登陆',
+      component: login
+    },
+    {
+      path: '/register',
       name: '注册',
       component: register
     },

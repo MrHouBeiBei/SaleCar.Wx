@@ -1,6 +1,6 @@
 import axios from 'axios';
 import store from '@/vuex/store'
-import * as types from '@/vuex/mutation-types'
+// import * as types from '@/vuex/mutation-types'
 // import env from '@/env'
 // import { Message } from "element-ui";
 
@@ -19,9 +19,9 @@ Http = axios.create({
 Http.interceptors.request.use(
     config => {
         // 更改全局 loading 状态 
-        if(!store.state.loadingFlag){   //判断 loading 的状态如果是 ture 就什么也不做
-            store.commit(types.LOADING_FLAG,true);
-        }
+        // if(!store.state.loadingFlag){   //判断 loading 的状态如果是 ture 就什么也不做
+        //     store.commit(types.LOADING_FLAG,true);
+        // }
 
         Http.defaults.headers.common['Content-Type'] = 'application/json-patch+json';
 
@@ -31,13 +31,14 @@ Http.interceptors.request.use(
         if(store.state.login){
             // Http.defaults.headers.common['Authorization'] ='Bearer ' +  store.state.user.token;
             // Http.defaults.headers.common['abc'] ='Bearer ' +  store.state.user.token;
-            config.headers['Authorization'] ='Bearer ' +  store.state.user.token;
+            // config.headers['Authorization'] ='Bearer ' +  store.state.user.token;
+            config.headers['Authorization'] ='Bearer ' +  store.state.token;
         }
         return config;
     },
     error => {
         // 关闭全局 loading 状态
-        store.commit(types.LOADING_FLAG,false);
+        // store.commit(types.LOADING_FLAG,false);
         Promise.reject(error);
     }
 );
@@ -47,7 +48,7 @@ Http.interceptors.response.use(
     response => {
         // 关不全局 loading 状态
         // TODO: 拦截业务逻辑是错误的状态,
-        store.commit(types.LOADING_FLAG,false);
+        // store.commit(types.LOADING_FLAG,false);
         if(response.data && response.data.code >= 10000){
            //TODO: 提示信息
            Message.error({
@@ -63,7 +64,7 @@ Http.interceptors.response.use(
     },
     error => {
         // 关闭全局 loading 状态
-        store.commit(types.LOADING_FLAG,false);
+        // store.commit(types.LOADING_FLAG,false);
         return Promise.reject(error);
     }
 );
