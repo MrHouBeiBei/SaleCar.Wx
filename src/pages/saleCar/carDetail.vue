@@ -78,12 +78,15 @@
         </div>
       </div>
     </div>
+    <!-- <input type="button" @click="clearToken" value="清楚token"> -->
+    
 
     <div class="content">
       <div v-html="carItem.html">
         {{carItem.html}}
       </div>
     </div>
+
 
     <!-- 底部导航栏 -->
     <footer>
@@ -365,6 +368,7 @@
 
 <script>
   import http from "@/api/ajax";
+  import { auth } from "@/components/auth";
   import {
     API_CAR_LIST,
     HOST,
@@ -386,9 +390,13 @@
       }
     },
     created() {
+      auth()
       this.init()
     },
     methods: {
+      clearToken() {
+        localStorage.token = ''
+      },
       async init() {
         await this.getDetail();
         this.phone = `tel:${this.carItem.salesmanPhone}`
@@ -415,8 +423,7 @@
                 this.carItem.imgUrl66 = `${BASE_URL}/file_server?uri=${this.carItem.imgUrl6}`
 
                 var str = this.carItem.nowCar3Price/100 * this.carItem.payPercent/100+''
-                // str表示原字符串变量，flg表示要插入的字符串，sn表示要插入的位置
-                // this.deposit = this.insert_flg(str, ',', -3)
+              
                 this.deposit = str.split("").reverse().join("").replace(/([0-9]{3})/g,"$1,").split("").reverse().join("");
                 console.log(this.deposit)
                 resolve()
@@ -445,14 +452,7 @@
         }
         // console.log(this.remainTimeArry)
       },
-      insert_flg(str, flg, sn) {
-        var newstr = "";
-        for (var i = 0; i < str.length; i += sn) {
-          var tmp = str.substring(i, i + sn);
-          newstr += tmp + flg;
-        }
-        return newstr;
-      },
+      
       toastTip() {
         Toast({
           message: '该功能暂时还未上线，请联系客服！',

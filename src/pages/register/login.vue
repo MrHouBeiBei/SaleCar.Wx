@@ -73,12 +73,14 @@
             //未登录没有token
             uri = urlSearch.split("?")[1].split("=")[1];
             let url = `${LOGIN}?uri=${uri}`;
+            console.log('指定地址', url)
             window.location.href = url;
           }
           //没有指定进入页面
         } else {
           uri = 'concessionCarList';
           let url = `${LOGIN}?uri=${uri}`;
+          console.log('默认页面地址',url)
           window.location.href = url;
         }
       },
