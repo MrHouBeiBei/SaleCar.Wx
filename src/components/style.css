@@ -64,3 +64,12 @@ input{
     /* -webkit-appearance: none; */
 }
 
+
+body,td,th {
+    /* font-family: Verdana, Arial, Helvetica, sans-serif; */
+    font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+    /* font-size: 12px; */
+    color: #1d1007;
+    /* line-height:24px; */
+} 
+

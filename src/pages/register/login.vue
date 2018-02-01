@@ -1,7 +1,8 @@
 <template>
   <div class="box">
-    登陆
-    <input type="button" value="登陆" @click="login">
+
+    正在登陆...
+    <!-- <input type="button" value="登陆" @click="login"> -->
     <!-- <input type="button" value="获取验证码" @click="getCode"> -->
   </div>
 </template>
@@ -9,6 +10,8 @@
 <style lang="less" scoped>
   .box {
     text-align: center;
+    padding-top: 2rem;
+    font-size: 15/20rem;
   }
 
 </style>
@@ -20,25 +23,29 @@
   import {
     LOGIN,
     HOST,
-    GET_CODE
+    GET_CODE,
+    API_USER_INFO
   } from "@/api/config";
   export default {
     data() {
       return {}
     },
     created() {
+      // 有token已登陆
       if(getToken()) {
         var urlSearch = window.location.search
-        console.log(urlSearch)
         var uri;
         if (urlSearch.indexOf('?') >= 0) {
+          console.log(2)
             uri = urlSearch.split("?")[1].split("=")[1];
-            // this.$router.push(`/${uri}`)
-            window.location.href = `${HOST}${uri}`
+            // this.getBinState(uri);
+            window.location.href = `${HOST}/#/${uri}`
         } else {
-          uri = 'register'
-          // this.$router.push(`/${uri}`)
-          window.location.href = `${HOST}${uri}`
+          uri = 'concessionCarList'
+          // uri = 'register'
+          console.log(1)
+          // this.getBinState(uri);
+          window.location.href = `${HOST}/#/${uri}`
         }
       } else {
         this.login()
@@ -46,30 +53,52 @@
     },
     methods: {
       login() {
-        var urlSearch = window.location.search
+        var urlSearch = window.location.search;
         var uri;
         // 如果打开的地址有?url
         if (urlSearch.indexOf('?') >= 0) {
-          //登陆redirect地址
+          //已登陆有token
           if (urlSearch.indexOf('&') > 0) {
             let uri_token = urlSearch.split("?")[1];
             uri = uri_token.split('&')[0].split('=')[1];
             let token = uri_token.split('&')[1].split('=')[1];
-            // localStorage.setItem("token", token) 
-            setToken(token)
-            window.location.href = `${HOST}${uri}`
-            // this.$store.commit('TOKEN', token)
+            console.log(token);
+            setToken(token);
+            // this.getBinState(uri);
+            window.location.href = `${HOST}/#/${uri}`
           } else {
             uri = urlSearch.split("?")[1].split("=")[1];
             let url = `${LOGIN}?uri=${uri}`;
             window.location.href = url;
           }
+          //没有指定进入页面
         } else {
-          uri = 'register';
+          uri = 'concessionCarList';
           let url = `${LOGIN}?uri=${uri}`;
           window.location.href = url;
         }
       },
+
+      getBinState(uri) {
+        console.log(getToken())
+        http('get', API_USER_INFO)
+        .then( rt => {
+          console.log(rt)
+          if( rt.code == 200 ) {
+            var phoneN = rt.body.phoneNumber;
+            // 已绑定
+            if(phoneN) {
+              console.log('已绑定')
+                window.location.href = `${HOST}/#/${uri}`
+            } else {
+              console.log('未绑定')
+              // console.log(`${HOST}/?${uri}/#/${register}`)
+              window.location.href = `${HOST}/?${uri}/#/register`;
+                // window.location.href = `${HOST}/#/${register}`
+            }
+          }
+        })
+      }
 
     }
   }

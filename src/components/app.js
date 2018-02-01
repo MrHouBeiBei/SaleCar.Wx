@@ -16,3 +16,9 @@
     win.addEventListener(resizeEvt, recalc, false);
     doc.addEventListener('DOMContentLoaded', recalc, false);
   })(document, window);
+
+
+
+export const countDown = function  (data) {
+    // console.log(data)
+}

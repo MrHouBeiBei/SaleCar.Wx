@@ -131,11 +131,22 @@
         check: 'true',
         verifyCodeTime: '发送验证码',
         buttonDisable: false,
-        binButtonDisable: true
+        // binButtonDisable: true
+        binButtonDisable: false,
+        uri: '',
       }
     },
-    created() {},
+    created() {
+      this.init()
+    },
     methods: {
+      init() {
+        this.getUrlSearch()
+      },
+      getUrlSearch() {
+        let search = window.location.search;
+        this.uri = search.split('?')[1].split('/')[0];
+      },
       getCode() {
         var regMobile = /^1[34578]\d{9}$/;
         if (!regMobile.test(this.phone)) {
