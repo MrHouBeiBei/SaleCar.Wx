@@ -32,25 +32,26 @@
     },
     created() {
       // 有token已登陆
-      // if(getToken()) {
-      //   var urlSearch = window.location.search
-      //   var uri;
-      //   if (urlSearch.indexOf('?') >= 0) {
-      //     console.log(2)
-      //       uri = urlSearch.split("?")[1].split("=")[1];
-      //       // this.getBinState(uri);
-      //       window.location.href = `${HOST}/#/${uri}`
-      //   } else {
-      //     uri = 'concessionCarList'
-      //     // uri = 'register'
-      //     console.log(1)
-      //     // this.getBinState(uri);
-      //     window.location.href = `${HOST}/#/${uri}`
-      //   }
-      // } else {
-      //   this.login()
-      // }
-       this.login()
+      if(getToken()) {
+        var urlSearch = window.location.search
+        var uri;
+        uri = urlSearch.split("?")[1].split("=")[1];
+        // if (urlSearch.indexOf('?') >= 0) {
+        if (uri) {
+            uri = urlSearch.split("?")[1].split("=")[1];
+            // this.getBinState(uri);
+            console.log('有token有默认地址')
+            window.location.href = `${HOST}/#/${uri}`
+        } else {
+          uri = 'concessionCarList'
+          console.log('有token无默认地址')
+          // this.getBinState(uri);
+          window.location.href = `${HOST}/#/${uri}`
+        }
+      } else {
+        this.login()
+      }
+      //  this.login()
     },
     methods: {
       login() {
