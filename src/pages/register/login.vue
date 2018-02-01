@@ -32,24 +32,25 @@
     },
     created() {
       // 有token已登陆
-      if(getToken()) {
-        var urlSearch = window.location.search
-        var uri;
-        if (urlSearch.indexOf('?') >= 0) {
-          console.log(2)
-            uri = urlSearch.split("?")[1].split("=")[1];
-            // this.getBinState(uri);
-            window.location.href = `${HOST}/#/${uri}`
-        } else {
-          uri = 'concessionCarList'
-          // uri = 'register'
-          console.log(1)
-          // this.getBinState(uri);
-          window.location.href = `${HOST}/#/${uri}`
-        }
-      } else {
-        this.login()
-      }
+      // if(getToken()) {
+      //   var urlSearch = window.location.search
+      //   var uri;
+      //   if (urlSearch.indexOf('?') >= 0) {
+      //     console.log(2)
+      //       uri = urlSearch.split("?")[1].split("=")[1];
+      //       // this.getBinState(uri);
+      //       window.location.href = `${HOST}/#/${uri}`
+      //   } else {
+      //     uri = 'concessionCarList'
+      //     // uri = 'register'
+      //     console.log(1)
+      //     // this.getBinState(uri);
+      //     window.location.href = `${HOST}/#/${uri}`
+      //   }
+      // } else {
+      //   this.login()
+      // }
+       this.login()
     },
     methods: {
       login() {
@@ -61,12 +62,15 @@
           if (urlSearch.indexOf('&') > 0) {
             let uri_token = urlSearch.split("?")[1];
             uri = uri_token.split('&')[0].split('=')[1];
+            // uri = window.location.href;
+            // console.log(`${HOST}/#/${uri}`)
             let token = uri_token.split('&')[1].split('=')[1];
-            console.log(token);
+            console.log('登陆拿到的token', token);
             setToken(token);
             // this.getBinState(uri);
             window.location.href = `${HOST}/#/${uri}`
           } else {
+            //未登录没有token
             uri = urlSearch.split("?")[1].split("=")[1];
             let url = `${LOGIN}?uri=${uri}`;
             window.location.href = url;

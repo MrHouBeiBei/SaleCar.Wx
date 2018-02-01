@@ -18,6 +18,11 @@
   })(document, window);
 
 
+  // 防止页面左右滑动
+  document.body.addEventListener('touchmove', function (event) {
+    event.preventDefault();}, true);
+
+
 
 export const countDown = function  (data) {
     // console.log(data)

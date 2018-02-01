@@ -9,7 +9,7 @@
       <div class="car-pic" v-if="carItem">
         <mt-swipe class="swipe" :auto="4000">
           <mt-swipe-item v-if="carItem.imgUrl1">
-            <!-- <img :src="@/assets/test.jpg" alt=""> -->
+            <!-- <img src="@/assets/test.jpg" alt=""> -->
             <img :src="carItem.imgUrl11" alt="">
           </mt-swipe-item>
           <mt-swipe-item v-if="carItem.imgUrl2">
@@ -72,7 +72,8 @@
           <i></i> 定金
         </div>
         <div>
-          <span>￥{{carItem.nowCar3Price/100 * carItem.payPercent/100}}元</span>
+          <!-- <span>￥{{carItem.nowCar3Price/100 * carItem.payPercent/100}}元</span> -->
+          <span>￥{{deposit}}元</span>
           <span>定金比例{{carItem.payPercent}}%</span>
         </div>
       </div>
@@ -115,14 +116,27 @@
 
 .content{
   background-color: #FFF;
-  width: 100%;
-  // height: auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  font-size: 17/20rem;
+  color: #3b3a3a;
+  margin-top: 0.5rem;
+ 
+  // h4{
+  //   display: inline-block;
+  //   margin-left: 1rem;
+  // }
+
+  // div>p>img{
+  //   width: 10px !important;
+  // }
 }
 
   .box {
-    background-color: rgb(39, 62, 80);
+    background-color: #F3F3F3;
     height: 100%;
     padding-top: 40/20rem;
+    padding-bottom: 200/20rem;
   }
 
   .header{
@@ -164,13 +178,14 @@
     background-color: #FFF;
     padding-bottom: 0.5rem;
     .car-pic {
-      // height: 200/20rem;
-      height: 100%;
+      height: 250/20rem;
+      // height: 100%;
       width: 100%;
 
       img {
-        width: 100%; // height: 100%;
-        height: 200/20rem;
+        width: 100%; 
+        height: 100%;
+        // height: 200/20rem;
       }
     }
 
@@ -290,6 +305,7 @@
 
     .bottom-box {
       display: flex;
+      // box-sizing: border-box;
 
       div {
         flex: 1;
@@ -350,7 +366,9 @@
 <script>
   import http from "@/api/ajax";
   import {
-    API_CAR_LIST, HOST, BASE_URL
+    API_CAR_LIST,
+    HOST,
+    BASE_URL
   } from "@/api/config";
   import {
     Toast
@@ -363,7 +381,8 @@
         remainTimeArry: [],
         setI: '',
         // phone: `tel:${this.carItem.salesman_phone}`
-        phone: ''
+        phone: '',
+        deposit: '',
       }
     },
     created() {
@@ -374,7 +393,7 @@
         await this.getDetail();
         this.phone = `tel:${this.carItem.salesmanPhone}`
         this.cuntDown();
-        this.setI = setInterval( () => {
+        this.setI = setInterval(() => {
           this.cuntDown()
         }, 1000)
         this.configJSSDK()
@@ -394,6 +413,12 @@
                 this.carItem.imgUrl44 = `${BASE_URL}/file_server?uri=${this.carItem.imgUrl4}`
                 this.carItem.imgUrl55 = `${BASE_URL}/file_server?uri=${this.carItem.imgUrl5}`
                 this.carItem.imgUrl66 = `${BASE_URL}/file_server?uri=${this.carItem.imgUrl6}`
+
+                var str = this.carItem.nowCar3Price/100 * this.carItem.payPercent/100+''
+                // str表示原字符串变量，flg表示要插入的字符串，sn表示要插入的位置
+                // this.deposit = this.insert_flg(str, ',', -3)
+                this.deposit = str.split("").reverse().join("").replace(/([0-9]{3})/g,"$1,").split("").reverse().join("");
+                console.log(this.deposit)
                 resolve()
               }
             })
@@ -403,7 +428,7 @@
         // console.log(this.carItem.endDate)
         this.remainTimeArry = [];
         let times = this.carItem.endDate - new Date().getTime();
-          let remainingHour = Math.floor( times / (1000 * 60 * 60));
+        let remainingHour = Math.floor(times / (1000 * 60 * 60));
 
         if (remainingHour < 0) {
           this.remainTimeArry = [0, 0, 0]
@@ -414,10 +439,19 @@
           let remainingMinute = Math.floor((times - remainingHour * (60 * 60 * 1000)) / (1000 * 60));
           this.remainTimeArry.push(remainingMinute)
 
-          let remainingSecond = Math.floor((times - remainingHour * (60 * 60 * 1000) - remainingMinute * (60 * 1000)) / (1000));
+          let remainingSecond = Math.floor((times - remainingHour * (60 * 60 * 1000) - remainingMinute * (60 * 1000)) /
+            (1000));
           this.remainTimeArry.push(remainingSecond)
         }
         // console.log(this.remainTimeArry)
+      },
+      insert_flg(str, flg, sn) {
+        var newstr = "";
+        for (var i = 0; i < str.length; i += sn) {
+          var tmp = str.substring(i, i + sn);
+          newstr += tmp + flg;
+        }
+        return newstr;
       },
       toastTip() {
         Toast({
@@ -460,5 +494,6 @@
   }
 
 </script>
+
 
 
