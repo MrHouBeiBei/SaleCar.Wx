@@ -51,17 +51,17 @@
         </div>
         <div class="p">
           <!-- <span>￥{{carItem.nowCar1Price | price}}</span> -->
-          <span>￥{{carItem.nowCar1Price/1000000}}万</span>
+          <span>¥{{carItem.nowCar1Price/1000000}}万</span>
           <br>
           <span>{{carItem.nowCar1BeginCount}}-{{carItem.nowCar1EndCount}}台</span>
         </div>
         <div class="p">
-          <span>￥{{carItem.nowCar2Price/1000000}}万</span>
+          <span>¥{{carItem.nowCar2Price/1000000}}万</span>
           <br>
           <span>{{carItem.nowCar2BeginCount}}-{{carItem.nowCar2EndCount}}台</span>
         </div>
         <div class="p">
-          <span>￥{{carItem.nowCar3Price/1000000}}万</span>
+          <span>¥{{carItem.nowCar3Price/1000000}}万</span>
           <br>
           <span>{{carItem.nowCar3BeginCount}}-{{carItem.nowCar3EndCount}}台</span>
         </div>
@@ -73,7 +73,7 @@
         </div>
         <div>
           <!-- <span>￥{{carItem.nowCar3Price/100 * carItem.payPercent/100}}元</span> -->
-          <span>￥{{deposit}}元</span>
+          <span>¥{{deposit}}元</span>
           <span>定金比例{{carItem.payPercent}}%</span>
         </div>
       </div>
@@ -153,8 +153,8 @@
     background-size: 100% 100%;
     i{
       display: inline-block;
-      width: 0.9rem;
-      height: 0.9rem;
+      width: 0.5rem;
+      height: 0.8rem;
       // padding: 0 0.4rem;
       background: url(../../assets/goBack.png) no-repeat;
       background-size: 100% 100%;
@@ -197,20 +197,20 @@
       font-size: 15/20rem;
       font-weight: 600;
       text-align: justify;
-      color: rgb(0, 0, 0)
+      color: #303133;
     }
     .time {
       padding: 0 15/20rem;
       text-align: right;
       span:nth-of-type(1) {
         font-size: 14/20rem;
-        color: pink;
+        color: #FF5555;
 
         i:nth-of-type(1) {
           display: inline-block;
           width: 0.7rem;
           height: 0.7rem;
-          background: url(../../assets/clock.png) no-repeat;
+          background: url(../../assets/clock-pink.png) no-repeat;
           background-size: 100% 100%;
           vertical-align: middle;
           margin-right: 0.15rem;
@@ -230,7 +230,8 @@
         padding: 0.1rem 0.2rem;
         background-color: #010101;
         color: #FFF;
-        font-size: 13/20rem
+        font-size: 13/20rem;
+        border-radius: 0.2rem;
       }
     }
   }
@@ -247,15 +248,17 @@
         flex: 1;
         span:nth-child(1) {
           font-size: 15/20rem;
+          color: #FF5555;
         }
         span:nth-of-type(2) {
           font-size: 14/20rem;
+          color: #999999
         }
       }
       div:nth-child(1) {
         flex: 1.1;
         font-size: 15/20rem;
-        padding-top: 0.2rem;
+        padding-top: 0.7rem;
         i {
           display: inline-block;
           height: 0.8rem;
@@ -279,7 +282,7 @@
           display: inline-block;
           height: 0.8rem;
           width: 0.8rem;
-          background: url(../../assets/mony.png) no-repeat;
+          background: url(../../assets/confirm.png) no-repeat;
           background-size: 100% 100%;
           vertical-align: middle;
           margin-top: -0.2rem;
@@ -318,7 +321,7 @@
         {
         text-align: center;
         font-size: 15/20rem;
-        padding: 0.2rem 0;
+        // padding: 0.2rem 0;
         i {
           display: inline-block;
           width: 1rem;
@@ -455,7 +458,7 @@
       
       toastTip() {
         Toast({
-          message: '该功能暂时还未上线，请联系客服！',
+          message: '支付业务审核中，请先电话咨询和购买。',
           position: 'bottom',
           duration: 3000
         });

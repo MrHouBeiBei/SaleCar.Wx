@@ -9,11 +9,14 @@
     <button @click="changstore">getters</button>
     <button @click="mutationsStore">mutations</button>
     <button @click="action">action</button>
+
+    <input type="button" value="清除token" @click="clearnToken">
   </div>
 </template>
 
 <script>
 import watchTest from '../components/watchTest.vue'
+// import setToken from '@/api/storage'
 
 export default {
   name:'test',
@@ -50,6 +53,9 @@ export default {
     action(){
       this.$store.dispatch('actionsTest')
       console.log(this.$store.state.author)
+    },
+    clearnToken() {
+      localStorage.token = ''
     }
   }
 }

@@ -6,6 +6,9 @@
         <input type="text" placeholder="搜索汽车相关" v-model="searchName">
         <input type="button" value="搜索" @click="search">
       </div>
+<!-- <mt-search v-model="searchName" cancel-text="取消" placeholder="搜索">
+</mt-search> -->
+
     </header>
     <main>
       <ul>
@@ -17,12 +20,12 @@
             </div>
             <div class="content">
               <!-- 标题 -->
-              <h4>
+              <span class="h4">
                 <!-- <span>【特价车】</span>特价车信息介绍特价车信息介绍特价车信息介绍特价车信息介绍 -->
                 <span>【{{item.carType | carType}}】</span>{{item.topic}}
-              </h4>
+              </span>
               <div class="tag">
-                <span>{{item.nowCar1Price | price}}</span>
+                <span>￥{{item.nowCar1Price | price}}</span>
                 <!-- <span>超值</span>
                 <span>急售</span>
                 <span>0过户</span> -->
@@ -55,7 +58,7 @@
       background: url(../../assets/search.png) no-repeat;
       background-size: 100% 100%;
       position: absolute;
-      top: 1rem;
+      top: 1.1rem;
       left: 1rem;
     }
 
@@ -63,6 +66,8 @@
       width: 277/20rem;
       height: 35/20rem;
       line-height: 35/20rem;
+      padding-top: 5/20rem;
+      padding-bottom: 5/20rem;
       border: 1px solid #E8E8E8;
       border-radius: 0.2rem;
       padding-left: 30/20rem;
@@ -76,7 +81,7 @@
       // width: 277/20rem
       background-color: #F93A45;
       border: none;
-      height: 27/20rem;
+      height: 35/20rem;
       width: 54/20rem;
       border-radius: 0.4rem;
       font-size: 13/20rem;
@@ -86,14 +91,14 @@
   }
 
   .car-item {
-    border-bottom: 2px dashed rgb(206, 206, 206)
+    border-bottom: 1px dashed #cecece;
   }
 
   .itemBox {
-    padding: 7/20rem 15/20rem;
+    padding: 15/20rem 15/20rem;
     display: flex;
     .img {
-      flex: 0.9;
+      flex: 1;
       img {
         width: 93/20rem;
         height: 93/20rem;
@@ -103,9 +108,9 @@
     .content {
       flex: 2;
 
-      h4 {
+      span.h4 {
         span{
-          color: #D25960;
+          color: #d25960;
         }
         text-overflow: ellipsis;
         display: -webkit-box;
@@ -114,6 +119,7 @@
         overflow: hidden;
         font-size: 15/20rem;
         letter-spacing: 1px;
+        color: #303133;
       }
 
       .tag{
@@ -139,6 +145,7 @@
       }
 
       .time{
+        padding-top: 0.2rem;
         position: relative;
         i:nth-of-type(1){
           display: inline-block;
@@ -159,6 +166,7 @@
           background-color: #010101;
           color: #FFF;
           font-size: 13/20rem;
+          border-radius: 0.2rem;
         }
         i:nth-of-type(2){
           display: inline-block;

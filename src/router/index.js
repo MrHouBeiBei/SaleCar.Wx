@@ -5,6 +5,7 @@ import test from '@/pages/test'
 import defaultPage from '@/pages/default'
 // register
 import login from '@/pages/register/login'
+import loginOptimize from '@/pages/register/loginOptimize'
 import register from '@/pages/register/register'
 import userProtocol from '@/pages/register/userProtocol'
 //saleCar
@@ -34,6 +35,11 @@ const router =  new Router({
       name: '登陆',
       component: login
     },
+    // {
+    //   path: '/',
+    //   name: '优化登陆',
+    //   component: loginOptimize
+    // },
     {
       path: '/default',
       name: '默认页面',
