@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Hello from '@/components/Hello'
 import test from '@/pages/test'
+import defaultPage from '@/pages/default'
 // register
 import login from '@/pages/register/login'
 import register from '@/pages/register/register'
@@ -32,6 +33,11 @@ const router =  new Router({
       path: '/',
       name: '登陆',
       component: login
+    },
+    {
+      path: '/default',
+      name: '默认页面',
+      component: defaultPage
     },
     {
       path: '/register',
