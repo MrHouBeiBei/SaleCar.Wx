@@ -34,13 +34,14 @@
       // 有token已登陆
       if(getToken()) {
         var urlSearch = window.location.search
+        if(!urlSearch) urlSearch = '?'
         var uri;
         uri = urlSearch.split("?")[1].split("=")[1];
         // if (urlSearch.indexOf('?') >= 0) {
         if (uri) {
             uri = urlSearch.split("?")[1].split("=")[1];
             // this.getBinState(uri);
-            console.log('有token有默认地址')
+            console.log('有token有默认地址', uri)
             window.location.href = `${HOST}/#/${uri}`
         } else {
           uri = 'concessionCarList'
