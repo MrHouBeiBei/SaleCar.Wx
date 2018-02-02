@@ -15,8 +15,10 @@
         <li class="car-item" @click="goDetail(item.id)" v-for="(item, index) in carList" :key="index">
           <div class="itemBox">
             <div class="img">
+              <div>
+                <img :src="item.imgUrl11" alt="">
+              </div>
               <!-- <img src="@/assets/logo.png" alt=""> -->
-              <img :src="item.imgUrl11" alt="">
             </div>
             <div class="content">
               <!-- 标题 -->
@@ -95,18 +97,39 @@
   }
 
   .itemBox {
-    padding: 15/20rem 15/20rem;
-    display: flex;
+    padding: 12/20rem 15/20rem;
+    box-sizing: border-box;
+    
+    display: -webkit-flex;
+    display:flex;
+    
     .img {
       flex: 1;
+      // display: inline-block;
+      // width: 30%;
+
+      div{
+        width: 93/20rem;
+        height: 93/20-0.5rem;
+        padding-top: 0.5rem;
+        box-sizing: border-box;
+        img {
+          width: 93/20rem;
+        }
+      }
       img {
         width: 93/20rem;
-        height: 93/20rem;
+        // height: 93/20rem;
       }
     }
 
     .content {
+      // width: 67%;
+      // display: inline-block;
+      
       flex: 2;
+      // -webkit-box-flex: 2;
+      // -webkit-flex: 2;
 
       span.h4 {
         span{
@@ -162,7 +185,7 @@
           // height: 0.9rem;
           // line-height: 0.9rem;
           // text-align: center;
-          padding: 0.1rem 0.1rem;
+          padding: 0 2px;
           background-color: #010101;
           color: #FFF;
           font-size: 13/20rem;

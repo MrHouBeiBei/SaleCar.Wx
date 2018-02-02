@@ -78,7 +78,7 @@
         </div>
       </div>
     </div>
-    <!-- <input type="button" @click="clearToken" value="清楚token"> -->
+    <!-- <input type="button" @click="clearToken" value="清除token"> -->
     
 
     <div class="content">
@@ -118,12 +118,17 @@
 
 
 .content{
+  overflow: hidden;
   background-color: #FFF;
   padding: 0 1rem;
   box-sizing: border-box;
   font-size: 17/20rem;
   color: #3b3a3a;
   margin-top: 0.5rem;
+
+  // img{
+  //   width: 100%;
+  // }
  
   // h4{
   //   display: inline-block;
@@ -227,7 +232,8 @@
         // height: 0.9rem;
         // line-height: 0.9rem;
         // text-align: center;
-        padding: 0.1rem 0.2rem;
+        // padding: 0.1rem 0.2rem;
+        padding: 0 2px;
         background-color: #010101;
         color: #FFF;
         font-size: 13/20rem;
@@ -247,11 +253,11 @@
       div.p {
         flex: 1;
         span:nth-child(1) {
-          font-size: 15/20rem;
+          font-size: 16/20rem;
           color: #FF5555;
         }
         span:nth-of-type(2) {
-          font-size: 14/20rem;
+          font-size: 13/20rem;
           color: #999999
         }
       }
@@ -276,7 +282,7 @@
       padding: 12/20rem 16/20rem;
       div:nth-child(1) {
         flex: 1.1;
-        font-size: 15/20rem;
+        font-size: 16/20rem;
         padding-top: 0.1rem;
         i {
           display: inline-block;
@@ -296,7 +302,7 @@
           color: #FF5555;
         }
         span:nth-child(2) {
-          font-size: 15/20rem;
+          font-size: 13/20rem;
           color: rgb(153, 153, 153)
         }
       }
@@ -312,6 +318,8 @@
     .bottom-box {
       display: flex;
       // box-sizing: border-box;
+      // box-shadow: v-shadow 2px 2px pink;
+      box-shadow: 0px -1px #d6d4d4;
 
       div {
         flex: 1;
@@ -321,6 +329,8 @@
         {
         text-align: center;
         font-size: 15/20rem;
+        padding-top: 4px;
+        
         // padding: 0.2rem 0;
         i {
           display: inline-block;
@@ -346,6 +356,7 @@
           background: url(../../assets/unShopCart.png) no-repeat;
           background-size: 100% 100%;
         }
+        color: rgb(161, 159, 159);
       } //  div:nth-child(3){
       //   i{
       //     background: url(../../assets/noOrder.png) no-repeat;
@@ -353,15 +364,19 @@
       //   }
       // }
       div:last-child {
+        position: relative;
         input {
-          display: inline-block;
+          // display: inline-block;
           border: none;
-          width: 100%;
-          height: 48/20rem;
+          // width: 100%;
+          // height: 48/20rem;
           font-size: 16/20rem;
           color: rgb(255, 255, 255);
           background-color: #E43B40;
           -webkit-appearance: none;
+          position: absolute;
+          width:100%;height:100%;border-top:0px;border-left:0px;border-right:0px;border-bottom:0px;
+          border-radius: 0;
         }
       }
     }
@@ -392,8 +407,11 @@
         deposit: '',
       }
     },
-    created() {
+    beforeCreate() {
       auth()
+    },
+    created() {
+      window.scrollTo(0, 0)
       this.init()
     },
     methods: {
@@ -428,12 +446,16 @@
                 var str = this.carItem.nowCar3Price/100 * this.carItem.payPercent/100+''
               
                 this.deposit = str.split("").reverse().join("").replace(/([0-9]{3})/g,"$1,").split("").reverse().join("");
+
                 console.log(this.deposit)
                 resolve()
+              } else if (rt.code == 501) {
+                auth()
               }
             })
         })
       },
+      
       cuntDown() {
         // console.log(this.carItem.endDate)
         this.remainTimeArry = [];

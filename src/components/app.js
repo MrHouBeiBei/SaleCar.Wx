@@ -19,8 +19,8 @@
 
 
   // 防止页面左右滑动
-  document.body.addEventListener('touchmove', function (event) {
-    event.preventDefault();}, true);
+  // document.body.addEventListener('touchmove', function (event) {
+  //   event.preventDefault();}, true);
 
 
 

@@ -1,7 +1,7 @@
 <template>
   <div class="box">
 
-    正在登陆...
+    <!-- 正在登陆... -->
     <!-- <input type="button" value="登陆" @click="login"> -->
     <!-- <input type="button" value="获取验证码" @click="getCode"> -->
   </div>
@@ -24,7 +24,8 @@
     LOGIN,
     HOST,
     GET_CODE,
-    API_USER_INFO
+    API_USER_INFO,
+    API_ISLOGIN
   } from "@/api/config";
   export default {
     data() {
@@ -32,27 +33,27 @@
     },
     created() {
       // 有token已登陆
-      if(getToken()) {
-        var urlSearch = window.location.search
-        if(!urlSearch) urlSearch = '?'
-        var uri;
-        uri = urlSearch.split("?")[1].split("=")[1];
-        // if (urlSearch.indexOf('?') >= 0) {
-        if (uri) {
-            uri = urlSearch.split("?")[1].split("=")[1];
-            // this.getBinState(uri);
-            console.log('有token有默认地址', uri)
-            window.location.href = `${HOST}/#/${uri}`
-        } else {
-          uri = 'concessionCarList'
-          console.log('有token无默认地址')
-          // this.getBinState(uri);
-          window.location.href = `${HOST}/#/${uri}`
-        }
-      } else {
-        this.login()
-      }
-      //  this.login()
+      // if(getToken()) {
+      //   var urlSearch = window.location.search
+      //   if(!urlSearch) urlSearch = '?'
+      //   var uri;
+      //   uri = urlSearch.split("?")[1].split("=")[1];
+      //   // if (urlSearch.indexOf('?') >= 0) {
+      //   if (uri) {
+      //       uri = urlSearch.split("?")[1].split("=")[1];
+      //       // this.getBinState(uri);
+      //       console.log('有token有默认地址', uri)
+      //       window.location.href = `${HOST}/#/${uri}`
+      //   } else {
+      //     uri = 'concessionCarList'
+      //     console.log('有token无默认地址')
+      //     // this.getBinState(uri);
+      //     window.location.href = `${HOST}/#/${uri}`
+      //   }
+      // } else {
+      //   this.login()
+      // }
+       this.login()
     },
     methods: {
       login() {
@@ -85,6 +86,22 @@
           console.log('默认页面地址',url)
           window.location.href = url;
         }
+      },
+
+
+      //通过getInfo判断token是否有效
+      getInfo() {
+        http('get', API_ISLOGIN)
+        .then( rt => {
+          console.log(rt)
+          var state;
+          if( rt.code == 200 ) {
+            state = true
+          } else if ( rt.code == 500 ) {
+            state = false
+          }
+          return state
+        })
       },
 
       getBinState(uri) {

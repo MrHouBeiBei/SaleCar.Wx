@@ -1,6 +1,5 @@
 // window.GLOBAL_BASE = "http://wx.baozhenche.com";
 
-// export const HOST = `http://${window.location.host}/#/`
 export const HOST = `http://${window.location.host}`
 
 export const BASE_URL = "http://wx.baozhenche.com";
@@ -8,6 +7,9 @@ export const BASE_URL = "http://wx.baozhenche.com";
 
 //登陆
 export const LOGIN = `${BASE_URL}/wechatLogin`;
+
+//判断是否登陆
+export const API_ISLOGIN = `${BASE_URL}/isLogin`;
 
 //发送验证码
 export const GET_CODE = `${BASE_URL}/sendMsgCode`;
