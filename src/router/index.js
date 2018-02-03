@@ -20,26 +20,26 @@ const router =  new Router({
     //   path: '/',  // 默认进入路由
     //   redirect: '/home'   //重定向
     // },
-    // {
-    //   path: '/',
-    //   name: 'Hello',
-    //   component: Hello
-    // },
-    {
-      path: '/test',
-      name: 'test',
-      component: test
-    },
     {
       path: '/',
-      name: '登陆',
-      component: login
+      name: 'Hello',
+      component: Hello
     },
     // {
-    //   path: '/',
-    //   name: '优化登陆',
-    //   component: loginOptimize
+    //   path: '/test',
+    //   name: 'test',
+    //   component: test
     // },
+    // {
+    //   path: '/',
+    //   name: '登陆',
+    //   component: login
+    // },
+    {
+      path: '/',
+      name: '优化登陆',
+      component: loginOptimize
+    },
     {
       path: '/default',
       name: '默认页面',

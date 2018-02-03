@@ -32,27 +32,6 @@
       return {}
     },
     created() {
-      // 有token已登陆
-      // if(getToken()) {
-      //   var urlSearch = window.location.search
-      //   if(!urlSearch) urlSearch = '?'
-      //   var uri;
-      //   uri = urlSearch.split("?")[1].split("=")[1];
-      //   // if (urlSearch.indexOf('?') >= 0) {
-      //   if (uri) {
-      //       uri = urlSearch.split("?")[1].split("=")[1];
-      //       // this.getBinState(uri);
-      //       console.log('有token有默认地址', uri)
-      //       window.location.href = `${HOST}/#/${uri}`
-      //   } else {
-      //     uri = 'concessionCarList'
-      //     console.log('有token无默认地址')
-      //     // this.getBinState(uri);
-      //     window.location.href = `${HOST}/#/${uri}`
-      //   }
-      // } else {
-      //   this.login()
-      // }
        
       // 判断是否登陆
        this.getLoginState().then(rt => {
@@ -63,6 +42,8 @@
            this.login()
          }
        })
+
+      //  this.login()
 
     },
     methods: {
@@ -76,13 +57,17 @@
         if (uri) {
             uri = urlSearch.split("?")[1].split("=")[1];
             // this.getBinState(uri);
-            console.log('有token有默认地址', uri)
-            window.location.href = `${HOST}/#/${uri}`
+            console.log('有token有默认地址', uri);
+            // window.location.href = `${HOST}/#/${uri}`
+            window.location.href = uri;
         } else {
-          uri = 'concessionCarList'
-          console.log('有token无默认地址')
+          // uri = 'concessionCarList'
+          uri = `http://${HOST}/#/concessionCarList` 
+          // 'concessionCarList'
+          console.log('有token无默认地址');
           // this.getBinState(uri);
-          window.location.href = `${HOST}/#/${uri}`
+          // window.location.href = `${HOST}/#/${uri}`
+          window.location.href = uri;
         }
       },
 
@@ -102,14 +87,17 @@
             uri = decodeURIComponent(uri)
             console.log('登陆拿到的解码', uri);
 
-            let orignHost = uri.split('#')[0]   //todo
+            let orignHost = uri.split('#')[0]  
+            // let orignHost = `http://www.baozhenche.com/`
             console.log('原始host',orignHost)
             let newHost = `http://${window.location.host}/`
             console.log('登陆时跳转的host', newHost)
-            if(orignHost != newHost) {
+            if( orignHost != newHost ) {
               let loginUrl = window.location.href;
-              loginUrl.replace(newHost, orignHost)
-              console.log('替换后的host', loginUrl)
+              let jumpUrl = loginUrl.replace(newHost, orignHost)
+              console.log('替换后的host', jumpUrl)
+              window.location.href = jumpUrl;
+              return;
             }
             
             console.log('登陆拿到的token', token);
@@ -124,7 +112,7 @@
             console.log('指定地址未编码url', url)
             url = this.decode(uri)
             console.log('指定地址编码后url', url)
-            // window.location.href = url;
+            window.location.href = url;
           }
           //没有指定进入页面
         } else {
@@ -133,7 +121,7 @@
           //编码后微信登陆地址
           let url = this.decode(uri);
           console.log('默认页面地址编码后',url)
-          // window.location.href = url;
+          window.location.href = url;
         }
       },
 
