@@ -1,5 +1,6 @@
 
 import { getToken } from './storage'
+import { auth } from '@/components/auth'
 
 export default (type='GET', url='', data={}, async=true) => {
 	return new Promise((resolve, reject) => { //定义一个promise
@@ -37,7 +38,11 @@ export default (type='GET', url='', data={}, async=true) => {
 				if (requestObj.status == 200) {
 					let obj = requestObj.response
 					if (typeof obj !== 'object') {
-						obj = JSON.parse(obj);
+						obj = JSON.parse(obj); 
+						if(obj.code == 501) {
+							auth();
+							return;
+						}
 					}
 					resolve(obj);
 				}else {

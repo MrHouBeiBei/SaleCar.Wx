@@ -19,7 +19,7 @@
 <script>
   import api from "@/api/api";
   import http from "@/api/ajax";
-  import { setToken, getToken} from "@/api/storage";
+  import { setToken, getToken , setLoginState} from "@/api/storage";
   import {
     LOGIN,
     HOST,
@@ -34,42 +34,19 @@
     created() {
        
       // 判断是否登陆
-       this.getLoginState().then(rt => {
-         console.log(rt)
-         if(rt == 200 ) {
-           this.isLogin()
-         } else {
-           this.login()
-         }
-       })
+      //  this.getLoginState().then(rt => {
+      //    console.log(rt)
+      //    if(rt == 200 ) {
+      //      this.isLogin()
+      //    } else {
+      //      this.login()
+      //    }
+      //  })
 
-      //  this.login()
+       this.login()
 
     },
     methods: {
-      //已登陆时调用
-      isLogin() {
-        var urlSearch = window.location.search
-        if(!urlSearch) urlSearch = '?'
-        var uri;
-        uri = urlSearch.split("?")[1].split("=")[1];
-        // if (urlSearch.indexOf('?') >= 0) {
-        if (uri) {
-            uri = urlSearch.split("?")[1].split("=")[1];
-            // this.getBinState(uri);
-            console.log('有token有默认地址', uri);
-            // window.location.href = `${HOST}/#/${uri}`
-            window.location.href = uri;
-        } else {
-          // uri = 'concessionCarList'
-          uri = `http://${HOST}/#/concessionCarList` 
-          // 'concessionCarList'
-          console.log('有token无默认地址');
-          // this.getBinState(uri);
-          // window.location.href = `${HOST}/#/${uri}`
-          window.location.href = uri;
-        }
-      },
 
       //未登录时调用
       login() {
@@ -101,8 +78,11 @@
             }
             
             console.log('登陆拿到的token', token);
+            //存储登陆状态
+            setLoginState(true)
+            //存储token
             setToken(token);
-            // window.location.href = uri
+            window.location.href = uri
           } else {  
             //未访问微信登陆地址，地址中没有token
 
@@ -129,6 +109,30 @@
       decode(uri) {
         uri = encodeURIComponent(uri)
         return `${LOGIN}?uri=${uri}`;
+      },
+
+       //已登陆时调用
+      isLogin() {
+        var urlSearch = window.location.search
+        if(!urlSearch) urlSearch = '?'
+        var uri;
+        uri = urlSearch.split("?")[1].split("=")[1];
+        // if (urlSearch.indexOf('?') >= 0) {
+        if (uri) {
+            uri = urlSearch.split("?")[1].split("=")[1];
+            // this.getBinState(uri);
+            console.log('有token有默认地址', uri);
+            // window.location.href = `${HOST}/#/${uri}`
+            window.location.href = uri;
+        } else {
+          // uri = 'concessionCarList'
+          uri = `http://${HOST}/#/concessionCarList` 
+          // 'concessionCarList'
+          console.log('有token无默认地址');
+          // this.getBinState(uri);
+          // window.location.href = `${HOST}/#/${uri}`
+          window.location.href = uri;
+        }
       },
 
       //调用接口判断是否登陆

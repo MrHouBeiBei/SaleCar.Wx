@@ -78,7 +78,7 @@
         </div>
       </div>
     </div>
-    <!-- <input type="button" @click="clearToken" value="清除token"> -->
+    <input type="button" @click="clearToken" value="清除token">
     
 
     <div class="content">
@@ -408,7 +408,7 @@
       }
     },
     beforeCreate() {
-      auth()
+      // auth()
     },
     created() {
       window.scrollTo(0, 0)

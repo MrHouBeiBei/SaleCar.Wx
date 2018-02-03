@@ -16,6 +16,7 @@ import "./components/JSSDK.js"
 import "./components/jquery-3.1.1.min.js"
 import "./api/config.js"
 
+
 // Vue.config.productionTip = false
 // Vue.config.silent = true
 
