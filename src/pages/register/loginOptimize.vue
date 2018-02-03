@@ -57,7 +57,7 @@
           //已访问微信登陆url登陆，地址中有token
           if (urlSearch.indexOf('&') > 0) {
             let uri_token = urlSearch.split("?")[1];
-            uri = uri_token.split('&')[0].split('=')[1];
+            uri = uri_token.split('&')[0].split('=')[1];  //需要跳转的页面地址
          
             let token = uri_token.split('&')[1].split('=')[1];
             console.log('登陆拿到的uri', uri);
@@ -65,13 +65,12 @@
             console.log('登陆拿到的解码', uri);
 
             let orignHost = uri.split('#')[0]  
-            // let orignHost = `http://www.baozhenche.com/`
+            // let orignHost = `http://m.baozhenche.com/`
             console.log('原始host',orignHost)
             let newHost = `http://${window.location.host}/`
             console.log('登陆时跳转的host', newHost)
             if( orignHost != newHost ) {
-              let loginUrl = window.location.href;
-              let jumpUrl = loginUrl.replace(newHost, orignHost)
+              let jumpUrl = uri.replace(newHost, orignHost)
               console.log('替换后的host', jumpUrl)
               window.location.href = jumpUrl;
               return;
