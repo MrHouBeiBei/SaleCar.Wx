@@ -7,13 +7,14 @@
 </template>
 
 <script>
-export default {
-  name: 'app'
-}
+  export default {
+    name: 'app'
+  }
+
 </script>
 
 <style lang="less" scoped>
-/* #app {
+  /* #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -22,12 +23,34 @@ export default {
   margin-top: 60px;
 } */
 
-#app{
-  height: 100%;
-}
-
+  #app {
+    height: 100%;
+  }
 
 </style>
 
+<script>
+  import {
+    setInitialHref
+  } from '@/api/storage'
+  import { getLocalStorageList } from '@/share/currency.service'
 
+  export default {
+
+    data() {
+      return {
+
+      }
+    },
+    created() {
+      // console.log(window.location)
+      setInitialHref(window.location.href)
+      // getLocalStorageList()
+    },
+    methods: {
+
+    },
+  }
+
+</script>
 

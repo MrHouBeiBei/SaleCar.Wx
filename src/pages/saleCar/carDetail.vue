@@ -3,7 +3,7 @@
     <header class="header">
       <i @click="goBack"></i> 
       <span>商品详情</span>
-      <!-- <i class="share"></i>  -->
+      <i class="share" @click="toShare"></i> 
     </header>
     <div class="top">
       <div class="car-pic" v-if="carItem">
@@ -78,7 +78,7 @@
         </div>
       </div>
     </div>
-    <input type="button" @click="clearToken" value="清除token">
+    <!-- <input type="button" @click="clearToken" value="清除token"> -->
     
 
     <div class="content">
@@ -168,6 +168,7 @@
       margin-left: 0.5rem;
     }
     i.share{
+      width: 0.8rem;
       background: url(../../assets/share.png) no-repeat;
       background-size: 100% 100%;
       position: absolute;
@@ -387,6 +388,7 @@
 <script>
   import http from "@/api/ajax";
   import { auth } from "@/components/auth";
+  import { getJssdkConfig } from '@/share/jssdk.service'
   import {
     API_CAR_LIST,
     HOST,
@@ -490,6 +492,12 @@
       },
       configJSSDK() {
 
+      },
+      toShare() {
+        getJssdkConfig()
+        .then( rt => {
+          console.log(rt)
+        })
       }
     },
     destroyed() {
