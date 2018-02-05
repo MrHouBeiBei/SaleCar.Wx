@@ -31,6 +31,20 @@
             </li>
         </ul>
     </main>
+    <footer>
+      <div class="footer-box">
+        <div>
+          <input type="radio">
+        </div>
+        <div>
+          <span>在线定金合计：</span><span>¥99元</span> <br>
+          <span>尾款合计：9999 总费用：9999</span>
+        </div>
+        <div>
+          <span>去支付</span><span>(36)</span>
+        </div>
+      </div>
+    </footer>
 </div>
   
 </template>
@@ -98,7 +112,7 @@
             span:nth-child(1),
             span:nth-child(3),
             span:nth-child(2) {
-              display: inline-block;
+              // display: inline-block;
               padding: 0 0.3rem;
               font-size: 15/20rem;
               height: 100%;
@@ -123,6 +137,50 @@
           }
 
         }
+      }
+    }
+  }
+
+  footer{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  .footer-box{
+    display: flex;
+    width: 100%;
+    div:nth-child(1){
+      background-color: rgb(37, 37, 37);
+      flex: 0.3;
+      text-align: center;
+      padding-top: 17/20rem;
+    }
+    div:nth-child(2){
+      background-color: rgb(37, 37, 37);
+      flex: 2.4;
+      padding: 0.4rem 0;
+      span:nth-of-type(1){
+        font-size: 14/20rem;
+        color: rgb(202, 199, 199);
+      }
+      span:nth-of-type(2){
+        font-size: 17/20rem;
+        color: rgb(202, 199, 199);
+      }
+      span:nth-of-type(3){
+        font-size: 12/20rem;
+        color: rgb(102, 102, 102);
+      }
+    }
+    div:nth-child(3){
+      flex: 1;
+      background-color: rgb(227, 59, 64);
+      font-size: 17/20rem;
+      color: rgb(233, 223, 223);
+      text-align: center;
+      padding-top: 18/20rem;
+      span:nth-child(2){
+        font-size: 14/20rem;
       }
     }
   }

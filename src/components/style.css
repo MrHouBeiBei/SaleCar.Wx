@@ -61,7 +61,12 @@ body{
 }
 input{
     outline: none;
-    /* -webkit-appearance: none; */
+}
+input[type=button]{
+    -webkit-appearance: none;
+}
+textarea{
+    outline: none;
 }
 
 
@@ -84,4 +89,7 @@ body,td,th {
     visibility: hidden;
     clear: both;
 }
+
+
+
 

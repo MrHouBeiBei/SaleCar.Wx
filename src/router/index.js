@@ -12,6 +12,7 @@ import userProtocol from '@/pages/register/userProtocol'
 import concessionCarList from '@/pages/saleCar/concessionCarList'
 import carDetail from '@/pages/saleCar/carDetail'
 import shoppingCar from '@/pages/saleCar/shoppingCar'
+import addAddress from '@/pages/saleCar/addAddress'
 
 Vue.use(Router)
 
@@ -70,6 +71,11 @@ const router =  new Router({
       path: '/shoppingCar',
       name: '购物车',
       component: shoppingCar
+    },
+    {
+      path: '/addAddress',
+      name: '购物车',
+      component: addAddress
     },
     
     {
