@@ -1,7 +1,7 @@
 <template>
   <div class="box">
     <div class="header">
-      <top-header returnUrl="concessionCarList" title="收货地址编辑" :isShare='false'></top-header>
+      <top-header returnUrl="/addressList" title="收货地址编辑" :isShare='false'></top-header>
     </div>
     <main>
       <div class="content-box">

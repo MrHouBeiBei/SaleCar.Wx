@@ -13,6 +13,7 @@ import concessionCarList from '@/pages/saleCar/concessionCarList'
 import carDetail from '@/pages/saleCar/carDetail'
 import shoppingCar from '@/pages/saleCar/shoppingCar'
 import addAddress from '@/pages/saleCar/addAddress'
+import addressList from '@/pages/saleCar/addressList'
 
 Vue.use(Router)
 
@@ -73,9 +74,14 @@ const router =  new Router({
       component: shoppingCar
     },
     {
-      path: '/addAddress',
-      name: '购物车',
+      path: '/addAddress/:id',
+      name: '收货地址编辑',
       component: addAddress
+    },
+    {
+      path: '/addressList',
+      name: '收货地址列表',
+      component: addressList
     },
     
     {
