@@ -22,7 +22,7 @@ export function setInitialHref(data) {
     localStorage.setItem(STORAGE_INITIAL_HREF, data);
 }
 export function getInitialHref(data) {
-    localStorage.getItem(STORAGE_INITIAL_HREF);
+    return localStorage.getItem(STORAGE_INITIAL_HREF);
 }
 
 //用户登陆状态
