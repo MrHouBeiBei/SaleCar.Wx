@@ -97,14 +97,14 @@
             <p>电话咨询</p>
           </a>
         </div>
-        <div @click="toastTip">
+        <div @click="goShoppingCar">
           <i></i>
           <p>购物车</p>
         </div>
-        <!-- <div>
+        <div>
           <i></i>
           <p>我的订单</p>
-        </div> -->
+        </div>
         <div>
           <input type="button" value="加入购物车" @click="toastTip">
         </div>
@@ -326,7 +326,7 @@
         flex: 1;
       }
       div:nth-child(1),
-      div:nth-child(2), // div:nth-child(3) 
+      div:nth-child(2), div:nth-child(3) 
         {
         text-align: center;
         font-size: 15/20rem;
@@ -358,12 +358,14 @@
           background-size: 100% 100%;
         }
         color: rgb(161, 159, 159);
-      } //  div:nth-child(3){
-      //   i{
-      //     background: url(../../assets/noOrder.png) no-repeat;
-      //     background-size: 100% 100%;          
-      //   }
-      // }
+      } 
+       div:nth-child(3){
+        i{
+          background: url(../../assets/noOrder.png) no-repeat;
+          background-size: 100% 100%;          
+        }
+        color: rgb(161, 159, 159);
+      }
       div:last-child {
         position: relative;
         input {
@@ -480,6 +482,10 @@ import concessionCarListVue from './concessionCarList.vue';
           this.remainTimeArry.push(remainingSecond)
         }
         // console.log(this.remainTimeArry)
+      },
+
+      goShoppingCar() {
+        this.$router.push('/shoppingCar')
       },
       
       toastTip() {

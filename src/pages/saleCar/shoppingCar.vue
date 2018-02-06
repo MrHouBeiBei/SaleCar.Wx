@@ -1,7 +1,7 @@
 <template>
 <div class="box">
     <header>
-        <top-header returnUrl="concessionCarList" title="购物车" :isShare='false' @toShare="toShare"></top-header>
+        <top-header returnUrl="/concessionCarList" title="购物车" :isShare='false' @toShare="toShare"></top-header>
     </header>
     <main>
         <ul>
@@ -40,7 +40,7 @@
           <span>在线定金合计：</span><span>¥99元</span> <br>
           <span>尾款合计：9999 总费用：9999</span>
         </div>
-        <div>
+        <div @click="goPay">
           <span>去支付</span><span>(36)</span>
         </div>
       </div>
@@ -219,6 +219,9 @@ export default {
       },
       choice(data) {
         this.selectState = !this.selectState
+      },
+      goPay() {
+        this.$router.push('/writeOrder')
       }
   }
 }

@@ -2,7 +2,7 @@
 
 <div class="box">
     <div class="header">
-      <top-header returnUrl="concessionCarList" title="收货地址" :isShare='false'></top-header>
+      <top-header returnUrl="/writeOrder" title="收货地址" :isShare='false'></top-header>
     </div>
     <main>
         <ul>
@@ -107,7 +107,7 @@
       }
     },
     created() {
-
+        window.scrollTo(0, 0)
     },
     methods: {
         editorAddress(value) {
