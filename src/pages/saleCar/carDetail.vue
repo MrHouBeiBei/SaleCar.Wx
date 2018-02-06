@@ -3,7 +3,7 @@
     <header class="header">
       <i @click="goBack"></i> 
       <span>商品详情</span>
-      <!-- <i class="share"></i>  -->
+      <i class="share" @click="toShare"></i> 
     </header>
     <div class="top">
       <div class="car-pic" v-if="carItem">
@@ -97,14 +97,14 @@
             <p>电话咨询</p>
           </a>
         </div>
-        <div @click="toastTip">
+        <div @click="goShoppingCar">
           <i></i>
           <p>购物车</p>
         </div>
-        <!-- <div>
+        <div>
           <i></i>
           <p>我的订单</p>
-        </div> -->
+        </div>
         <div>
           <input type="button" value="加入购物车" @click="toastTip">
         </div>
@@ -168,6 +168,7 @@
       margin-left: 0.5rem;
     }
     i.share{
+      width: 0.8rem;
       background: url(../../assets/share.png) no-repeat;
       background-size: 100% 100%;
       position: absolute;
@@ -325,7 +326,7 @@
         flex: 1;
       }
       div:nth-child(1),
-      div:nth-child(2), // div:nth-child(3) 
+      div:nth-child(2), div:nth-child(3) 
         {
         text-align: center;
         font-size: 15/20rem;
@@ -357,12 +358,14 @@
           background-size: 100% 100%;
         }
         color: rgb(161, 159, 159);
-      } //  div:nth-child(3){
-      //   i{
-      //     background: url(../../assets/noOrder.png) no-repeat;
-      //     background-size: 100% 100%;          
-      //   }
-      // }
+      } 
+       div:nth-child(3){
+        i{
+          background: url(../../assets/noOrder.png) no-repeat;
+          background-size: 100% 100%;          
+        }
+        color: rgb(161, 159, 159);
+      }
       div:last-child {
         position: relative;
         input {
@@ -386,7 +389,10 @@
 
 <script>
   import http from "@/api/ajax";
+  import { getInitialHref } from "@/api/storage";
   import { auth } from "@/components/auth";
+  import { getJssdkConfig } from '@/share/jssdk.service'
+  import { getPlatform } from '@/share/currency.service'
   import {
     API_CAR_LIST,
     HOST,
@@ -395,6 +401,7 @@
   import {
     Toast
   } from 'mint-ui';
+import concessionCarListVue from './concessionCarList.vue';
   export default {
     data() {
       return {
@@ -408,7 +415,7 @@
       }
     },
     beforeCreate() {
-      auth()
+      // auth()
     },
     created() {
       window.scrollTo(0, 0)
@@ -425,7 +432,6 @@
         this.setI = setInterval(() => {
           this.cuntDown()
         }, 1000)
-        this.configJSSDK()
       },
       getDetail() {
         return new Promise((resolve, reject) => {
@@ -477,6 +483,10 @@
         }
         // console.log(this.remainTimeArry)
       },
+
+      goShoppingCar() {
+        this.$router.push('/shoppingCar')
+      },
       
       toastTip() {
         Toast({
@@ -488,8 +498,69 @@
       goBack() {
         this.$router.push('/concessionCarList')
       },
-      configJSSDK() {
+      toShare() {
+        let data = {};
+        data.url = `http://${window.location.host}`
+        getJssdkConfig(data)
+        .then( rt => {
+          // console.log(rt)
+          if(rt.code == 200) {
+            this.configJSSDK(rt.body)
+          }
+        })
+      },
+      configJSSDK(rt) {
+        var shareLink;
+        if(getPlatform() == 'ios'){
+          shareLink = getInitialHref();
+        } else {
+          shareLink = window.location.href
+        }
 
+        wx.config({
+          debug: true, 
+          appId: rt.appId, // 必填，公众号的唯一标识
+          timestamp: rt.timestamp, // 必填，生成签名的时间戳
+          nonceStr: rt.noncestr, // 必填，生成签名的随机串
+          signature: rt.signature,// 必填，签名，见附录1
+          jsApiList: ['scanQRCode', 'onMenuShareAppMessage', 'onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        })
+
+        wx.ready( () => {
+          console.log('分享链接', shareLink)
+
+          //分享给朋友圈
+          wx.onMenuShareAppMessage({
+            title: this.carItem.topic, // 分享标题
+            desc: '测试', // 分享描述
+            link: shareLink, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+            imgUrl: this.carItem.imgUrl1, // 分享图标
+           // type: '', // 分享类型,music、video或link，不填默认为link
+            // dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+              // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+              // 用户取消分享后执行的回调函数
+              console.log('分享取消')
+            }
+         });
+
+
+          wx.onMenuShareTimeline({
+           title: this.carItem.topic, // 分享标题
+           link: shareLink, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+           imgUrl: this.carItem.imgUrl1, // 分享图标
+           success: function () {
+             console.lg('成功')
+           // 用户确认分享后执行的回调函数
+           },
+          })
+
+        });
+
+        
+       
       }
     },
     destroyed() {

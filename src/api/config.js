@@ -1,4 +1,4 @@
-// window.GLOBAL_BASE = "http://wx.baozhenche.com";
+// window.BASE_URL = "http://wx.baozhenche.com";
 
 export const HOST = `http://${window.location.host}`
 
@@ -18,4 +18,8 @@ export const API_BIND = `${BASE_URL}/bind`;
 
 export const API_USER_INFO= `${BASE_URL}/myInfo`;
 
+//优惠汽车列表
 export const API_CAR_LIST = `${BASE_URL}/tCarCampaign/select`;
+
+//获取jssdk config
+export const API_WX_CONFIG = `${BASE_URL}/getWechatJsSdkConfig`;

@@ -11,6 +11,10 @@ import userProtocol from '@/pages/register/userProtocol'
 //saleCar
 import concessionCarList from '@/pages/saleCar/concessionCarList'
 import carDetail from '@/pages/saleCar/carDetail'
+import shoppingCar from '@/pages/saleCar/shoppingCar'
+import addAddress from '@/pages/saleCar/addAddress'
+import addressList from '@/pages/saleCar/addressList'
+import writeOrder from '@/pages/saleCar/writeOrder'
 
 Vue.use(Router)
 
@@ -65,6 +69,27 @@ const router =  new Router({
       name: '汽车详情',
       component: carDetail
     },
+    {
+      path: '/shoppingCar',
+      name: '购物车',
+      component: shoppingCar
+    },
+    {
+      path: '/writeOrder',
+      name: '填写订单',
+      component: writeOrder
+    },
+    {
+      path: '/addAddress/:id',
+      name: '收货地址编辑',
+      component: addAddress
+    },
+    {
+      path: '/addressList',
+      name: '收货地址列表',
+      component: addressList
+    },
+    
     {
       path: '**',   // 错误路由
       redirect: '/concessionCarList'   //重定向

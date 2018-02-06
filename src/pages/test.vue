@@ -11,6 +11,8 @@
     <button @click="action">action</button>
 
     <input type="button" value="清除token" @click="clearnToken">
+
+    <div class="css-test">css兼容分测试</div>
   </div>
 </template>
 
@@ -65,6 +67,9 @@ export default {
 <style lang="less" scoped>
 .lessTest{
   font-size: 50/2px
+}
+.css-test{
+  display: flex;
 }
 </style>
 

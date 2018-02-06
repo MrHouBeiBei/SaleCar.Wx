@@ -1,5 +1,6 @@
 
 import { getToken } from './storage'
+import { auth } from '@/components/auth'
 
 export default (type='GET', url='', data={}, async=true) => {
 	return new Promise((resolve, reject) => { //定义一个promise
@@ -22,7 +23,7 @@ export default (type='GET', url='', data={}, async=true) => {
 			requestObj.open(type, url, async);
 			requestObj.setRequestHeader("Content-type", "application/x-www-form-urlencoded")
 			requestObj.setRequestHeader("token", getToken())
-			console.log('请求接口', getToken())
+			// console.log('请求接口', getToken())
 			requestObj.send();
 		}else if (type == 'POST') {
 			requestObj.open(type, url, async);
@@ -37,7 +38,11 @@ export default (type='GET', url='', data={}, async=true) => {
 				if (requestObj.status == 200) {
 					let obj = requestObj.response
 					if (typeof obj !== 'object') {
-						obj = JSON.parse(obj);
+						obj = JSON.parse(obj); 
+						if(obj.code == 501) {
+							auth();
+							return;
+						}
 					}
 					resolve(obj);
 				}else {
